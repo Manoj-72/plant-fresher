@@ -1,0 +1,95 @@
+.vegetableCard{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    margin-right: 25px;
+    overflow: hidden;
+    margin-top: 0px;
+}
+.highlight {
+    width: 1600px;
+    height: 600px;
+}
+.vegetableCard h4 {
+    color: #484848;
+    font-weight: 600;
+    font-size: 20px;
+    margin:0;
+}
+.vegetableCard h5 {
+    color: #484848;
+    font-weight: 400;
+    font-size: 18px;
+    margin:0 0 10px 0;
+}
+.vegetableImg {
+    width: 194px;
+}
+.cardNameBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #FFFFFF;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;;
+    width: 180px;
+    margin-top: -20px;
+    padding-bottom: 15px;
+    margin-bottom: 40px;
+}
+.cardButtonBox{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.vegetableCounter {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+.vegetableCounter button{
+    border: 1px solid #FFB800;
+}
+.vegetableCountText {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height:19px;
+    background-color: #289402;
+}
+.vegetableCountText p {
+    margin: 0;
+    color: #FFFFFF;
+}
+.addToCart {
+    background: #289402;
+    border-radius: 4px;
+    border: 1px solid #289402;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 12px;
+    padding: 3px 7px;
+    cursor: pointer;
+    outline: none;
+}
+.shareBadge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    padding: 5px;
+    cursor: pointer;
+    top: 6px;
+    left: 150px;
+}
+.shareBadge:hover {
+    background-color: black;
+    color: #FFFFFF;
+    border-radius: 50%;
+    
+}

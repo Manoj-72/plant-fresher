@@ -1,0 +1,200 @@
+.table-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 94%;
+  margin: 0 20px 0 20px;
+}
+table td,
+table th {
+  padding: 8px;
+}
+/* 
+table > tbody > tr >  td:nth-child(1) {
+  
+}
+table > tbody > tr > td:nth-child(3) {
+  padding-left: 45px;
+}
+table > tbody > tr > td:nth-child(4) {
+  padding-left: 55px;
+} */
+table > thead > tr > th:nth-child(2){
+  padding-right:30px;
+}
+.snum-td{
+  padding-left: 60px;
+}
+.name-td{
+  padding-left: 75px;
+  padding-right: -29px;
+}
+.tag-td{
+  padding-left: 70px;
+}
+.date-td{
+  padding-left: 65px;
+}
+.price-td{
+  padding-left: 67px;
+}
+.action-td{
+  padding-left: 48px;
+}
+.input-td1{
+  padding-left: 40px;
+}
+.input-td2{
+  padding-left: 45px;
+}
+.input-td3{
+  padding-left: 45px;
+}
+.input-td4{
+  padding-left: 50px;
+}
+.input-td5{
+  padding-left: 50px;
+}
+.input-td6{
+  padding-left: 65px;
+}
+.edit-btn{
+  padding-left: 20px;
+}
+.table-input1{
+  width: 50px !important;
+}
+.table-input2{
+  width: 100px !important;
+}
+.table-input3{
+  width: 60px !important;
+}
+.table-input4{
+  width: 100px!important;
+}
+.table-input5{
+  width: 50px !important;
+}
+table > tbody > tr {
+  height: 60px;
+  background-color: #ffffff;
+  border: 2px solid #e2e2e2;
+  margin-bottom: 10px;
+  border-radius: 44px;
+}
+table th {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  text-align: center;
+  background-color: #289402;
+  color: #fff;
+  font-weight: 700;
+  font-size: 20px;
+}
+table th:nth-child(1) {
+  border-top-left-radius: 12px;
+}
+table th:nth-child(6) {
+  border-top-right-radius: 12px;
+}
+.table-input {
+  width: 120px;
+  border-radius: 5px;
+  border: 1px #289402 solid;
+  padding-left: 10px;
+  outline: none;
+}
+/* .td-box{
+  display: flex;
+  flex-direction: row;
+}
+.td-container{
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+} */
+
+.pagination-box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 56px;
+  background-color: #ffffff;
+  border-right: 2px solid #e2e2e2;
+  border-left: 2px solid #e2e2e2;
+  border-bottom: 2px solid #e2e2e2;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+  margin-bottom: 10px;
+  width: 93.5%;
+}
+.pagination-box p {
+  font-weight: 500;
+  font-size: 14px;
+  color: #289402;
+}
+.pagination-box p:last-child {
+  margin-right: 30px;
+}
+.modalContainer button {
+  background-color: #289402;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  color: #e2e2e2;
+  padding: 8px 20px;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.modalHeader {
+  color: #289402;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 48px;
+}
+
+.modalBody {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  
+}
+.modalInner,
+.modalInnerTwo {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.modalInner p{
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 36px;
+}
+.modalInnerTwo p{
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 36px;
+}
+.modalInnerTwo input {
+  width: 120px;
+  font-size: 17px;
+  font-weight: 400;
+  margin-top: 25px;
+  margin-bottom: 30px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #289402;
+}
+.modalInnerTwo input:nth-child(1){
+  margin-top: 28px;
+  
+  margin-bottom: 27px;
+}

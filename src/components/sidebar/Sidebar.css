@@ -1,0 +1,45 @@
+.sideBar {
+    padding-left: 25px;
+    height: 100vh;
+}
+.sideBarButton{
+    padding-top: 30px;
+}
+.sideBarMenu{
+    margin-top: 30px;
+}
+.activeLink{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 30px;
+    border-radius: 10px;
+    width: 220px;
+    color: #3A7F0D;
+    margin-left: -50px;
+    padding-left: 70px;
+    text-decoration: none;
+    background-color: #E4FFE1;
+    
+}
+.defaultLink{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 30px;
+    border-radius: 10px;
+    margin-left: -50px;
+    padding-left: 70px;
+    color: black;
+    text-decoration: none;
+}
+.activeLink h4, .defaultLink h4{
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+}
+.activeLink a, .defaultLink a{
+    text-decoration: none;
+}
