@@ -10,18 +10,13 @@ import moment from "moment";
 import { data } from "../table/MOCK_DATA";
 
 
- export const startDate = (e) => {
-    // console.log(e.target.value)
-  };
- export const endDate = (e) => {
-    // console.log(e.target.value)
-  };
+ export const startDate = (e) => {};
+ export const endDate = (e) => {};
 
 const NavbarPage = (props) => {
   const [dateFilters, setDateFilters] = useState({});
   const [search, setSearch] = useState("");
-  // const [typed, setTyped] = useState(props.filter)
-  
+
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
@@ -32,24 +27,6 @@ const NavbarPage = (props) => {
 
   const todayDate = moment(new Date()).format("YYYY-MM-DD")
 
-  // const searchWithDate = () => {
-  //   dateFilters.start &&
-  //     dateFilters.end &&
-  //     setTData(
-  //       data.filter(
-  //         ({ date }) =>
-  //           new Date(date) >= dateFilters.start &&
-  //           new Date(date) <= dateFilters.end
-  //       )
-  //     );
-  // };
-  // const setDateFilter = (e, type) => {
-  //   setDateFilters((prevState) => ({
-  //     ...prevState,
-  //     [type]: new Date(e),
-  //   }));
-  // };
-  // console.log(todayDate)
   return (
     <div className="navBar">
       <div className="navBarLeft">
@@ -65,15 +42,14 @@ const NavbarPage = (props) => {
             style={{cursor:'pointer'}}
           />
           <input
-            onChange={handleSearch}
+            onChange={props.cartFilter}
             className="navbar-search"
             placeholder="Search"
             name="search"
-            value={search}
             type='text'
           />
           <MdClear 
-            onClick={clearSearch}
+            onClick={props.clearSearch}
             style={{cursor:'pointer'}} />
         </div>
       )}
@@ -96,12 +72,12 @@ const NavbarPage = (props) => {
         </div>
       )}
       <div className="navBarRight">
-        {localStorage.getItem("logIn") ? (
+        {localStorage.getItem("userInfo") ? (
           <p>{props.nothing}</p>
         ) : (
           <p>{props.skip}</p>
         )}
-        {localStorage.getItem("logIn") ? (
+        {localStorage.getItem("userInfo") ? (
           <>{props.logout} </>
         ) : (
           <>{props.login}</>

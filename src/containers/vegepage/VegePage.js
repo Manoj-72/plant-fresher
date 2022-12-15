@@ -1,10 +1,10 @@
 import React from 'react'
 import { CartContainer, NavbarPage, Sidebar, Vegetable } from '../../components'
 import './VegePage.css'
-import data from './data'
+import DATA from './data'
 
 const VegePage = () => {
-  const cards = data.map(item => {
+  const vegcards = DATA.map(item => {
     return (
       <Vegetable 
         key={item.id}
@@ -15,7 +15,6 @@ const VegePage = () => {
         share={item.share}
         />
     )})
-    console.log(cards[1].props.price)
   return (
     <div className="App">
       <div className="sideBar-div">
@@ -26,7 +25,7 @@ const VegePage = () => {
       <NavbarPage title='vegetable' />
        <h1>Vegetable</h1>
        <div className='vegetableBox'>
-         {cards}
+         {vegcards}
        </div>
        </div>
       </div>

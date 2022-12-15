@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import swal from "sweetalert";
 import "./Login.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { NavbarPage } from "../../components";
-import { Icon } from 'react-icons-kit'
-import {eye} from 'react-icons-kit/feather/eye'
-import {eyeOff} from 'react-icons-kit/feather/eyeOff'
+import { Icon } from "react-icons-kit";
+import { eye } from "react-icons-kit/feather/eye";
+import { eyeOff } from "react-icons-kit/feather/eyeOff";
+import axios from "axios";
 
 const Login = (props) => {
   const email = useRef();
@@ -15,16 +16,53 @@ const Login = (props) => {
   const navigate = useNavigate();
   const localSignup = localStorage.getItem("logIn");
 
-  const handleClick = () => {
-    if (email.current.value && password.current.value) {
-      localStorage.setItem("email", email.current.value);
-      localStorage.setItem("password", password.current.value);
-      localStorage.setItem("logIn", email.current.value);
+  const [loginMobileNumber, setLoginMobileNumber] = useState("");
+
+  const [loginPassword, setLoginPassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
+
+  const [err, setErr] = useState(false);
+
+  const loginOperation = async (e) => {
+    e.preventDefault();
+    if (!loginMobileNumber.length || !loginPassword.length) return;
+    setLoading(true);
+    try {
+      let Data =
+        "userName=" +
+        loginMobileNumber +
+        "&password=" +
+        loginPassword +
+        "&grant_type=password&Type=cart";
+      const response = await axios({
+        method: "POST",
+        url: "https://fioritest.avaniko.com/login",
+        data: Data,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      });
+      localStorage.setItem("userInfo", JSON.stringify(response));
       swal({
         title: "Logged in successfully!",
         icon: "success",
         dangerMode: false,
       });
+      navigate("/");
+    } catch (err) {
+      setLoading(false);
+      setErr(true);
+      console.log(err)
+    }
+  };
+
+  const handleClick = () => {
+    if (email.current.value && password.current.value) {
+      localStorage.setItem("email", email.current.value);
+      localStorage.setItem("password", password.current.value);
+      localStorage.setItem("logIn", email.current.value);
+      
       navigate("/");
       console.log(localSignup);
     }
@@ -36,7 +74,7 @@ const Login = (props) => {
   };
 
   const [otp, setOtp] = useState(new Array(4).fill(""));
-  
+
   const handleChange = (element, index) => {
     if (isNaN(element.value)) return false;
     setOtp([...otp.map((d, idx) => (idx === index ? element.value : d))]);
@@ -57,52 +95,49 @@ const Login = (props) => {
   };
 
   const handleOTP = () => {
-      navigate("/reset-password");
-  }
+    navigate("/reset-password");
+  };
 
-  const [type, setType]=useState('password');
-  const [icon, setIcon]=useState(eyeOff);
+  const [type, setType] = useState("password");
+  const [icon, setIcon] = useState(eyeOff);
 
-  const [confirmType, setConfirmType]=useState('password');
-  const [confirmIcon, setConfirmIcon]=useState(eyeOff);
+  const [confirmType, setConfirmType] = useState("password");
+  const [confirmIcon, setConfirmIcon] = useState(eyeOff);
 
-  const newToggle=()=>{    
-    if(type==='password'){
-      setIcon(eye);      
-      setType('text');
+  const newToggle = () => {
+    if (type === "password") {
+      setIcon(eye);
+      setType("text");
+    } else {
+      setIcon(eyeOff);
+      setType("password");
     }
-    else{
-      setIcon(eyeOff);     
-      setType('password');
-    }
-  }
+  };
 
-  const confirmToggle=()=>{  
-    console.log(type)  
-    if(confirmType==='password'){
-      setConfirmIcon(eye);      
-      setConfirmType('text');
+  const confirmToggle = () => {
+    console.log(type);
+    if (confirmType === "password") {
+      setConfirmIcon(eye);
+      setConfirmType("text");
+    } else {
+      setConfirmIcon(eyeOff);
+      setConfirmType("password");
     }
-    else{
-      setConfirmIcon(eyeOff);     
-      setConfirmType('password');
-    }
-  }
+  };
 
-  const [newpassword, setNewpassword] = useState('');
-  const [confirmpassword, setConfirmpassword] = useState('');
+  const [newpassword, setNewpassword] = useState("");
+  const [confirmpassword, setConfirmpassword] = useState("");
 
   const handleNewPass = (e) => {
-    setNewpassword(e.target.value)
-  }
+    setNewpassword(e.target.value);
+  };
 
   const handleConfirmPass = (e) => {
-    setConfirmpassword(e.target.value)
-  }
+    setConfirmpassword(e.target.value);
+  };
 
-  
   const handleReset = () => {
-    if(newpassword === confirmpassword){
+    if (newpassword === confirmpassword) {
       swal({
         title: "Password changed successfully!",
         icon: "success",
@@ -111,7 +146,7 @@ const Login = (props) => {
       navigate("/");
     } else {
     }
-}
+  };
 
   return (
     <div className="login">
@@ -126,7 +161,8 @@ const Login = (props) => {
             className="loginInput"
             type="text"
             placeholder={props.placeholder}
-            ref={email}
+            // ref={email}
+            onChange={(e) => setLoginMobileNumber(e.target.value)}
           />
         )}
         {props.title === "Login" && (
@@ -134,7 +170,8 @@ const Login = (props) => {
             className="loginInput"
             type="password"
             placeholder="Password"
-            ref={password}
+            onChange={(e) => setLoginPassword(e.target.value)}
+            // ref={password}
           />
         )}
         {props.title === "Login" && (
@@ -143,10 +180,11 @@ const Login = (props) => {
           </Link>
         )}
         {props.title === "Login" && (
-          <button className="loginBtn" type="submit" onClick={handleClick}>
+          <button className="loginBtn" type="submit" onClick={loginOperation}>
             {props.button}
           </button>
-        )}
+          
+        )}{err && <p className="invalid-err">Invalid username or password</p>}
 
         {props.title === "Forget password" && (
           <h3 className="forgetHeading">{props.title}</h3>
@@ -207,13 +245,47 @@ const Login = (props) => {
             </div>
           </div>
         )}
-        {props.title === "Reset password" && (<h3 className="resetHeading">{props.title}</h3>)}
-        {props.title === "Reset password" && (<div className="resetBox"><input name="newpass" className="loginInput" type={type} placeholder={props.newpwd} onChange={handleNewPass}/><span onClick={newToggle}><Icon icon={icon} size={18}/></span></div>)}
-        {props.title === "Reset password" && (<div className="resetBox"><input name="confirmpass" className="loginInput" type={confirmType} placeholder={props.confirmpwd} onChange={handleConfirmPass}/><span onClick={confirmToggle}><Icon icon={confirmIcon} size={18}/></span></div>)}
-        {props.title === "Reset password" && (<><button className="otpBtn" type="submit" onClick={handleReset}>{props.button}</button></>)}
+        {props.title === "Reset password" && (
+          <h3 className="resetHeading">{props.title}</h3>
+        )}
+        {props.title === "Reset password" && (
+          <div className="resetBox">
+            <input
+              name="newpass"
+              className="loginInput"
+              type={type}
+              placeholder={props.newpwd}
+              onChange={handleNewPass}
+            />
+            <span onClick={newToggle}>
+              <Icon icon={icon} size={18} />
+            </span>
+          </div>
+        )}
+        {props.title === "Reset password" && (
+          <div className="resetBox">
+            <input
+              name="confirmpass"
+              className="loginInput"
+              type={confirmType}
+              placeholder={props.confirmpwd}
+              onChange={handleConfirmPass}
+            />
+            <span onClick={confirmToggle}>
+              <Icon icon={confirmIcon} size={18} />
+            </span>
+          </div>
+        )}
+        {props.title === "Reset password" && (
+          <>
+            <button className="otpBtn" type="submit" onClick={handleReset}>
+              {props.button}
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
-}
+};
 
 export default Login;

@@ -3,6 +3,7 @@ import { CartPage, Homepage, ResetPwd, TablePage, VegePage, Verification } from 
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import { Loginpage } from "./containers";
 import { ForegetPage } from "./containers";
+import {Loaderdesign} from "./components"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/vegetables' element={<VegePage />} />
         <Route path='/cart' element={<CartPage />} />
         <Route path='/table' element={<TablePage />} />
+        <Route path='/loader' element={<Loaderdesign />} />
       </Routes>
     </Router>
   );

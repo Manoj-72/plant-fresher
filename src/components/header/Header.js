@@ -6,9 +6,10 @@ import { FaLeaf, FaShippingFast } from "react-icons/fa";
 import { NavbarPage } from "../../components";
 
 const Header = () => {
+  
   const [logout, setLogout] = useState(false)
   const logOut = () => {
-    localStorage.removeItem('logIn')
+    localStorage.removeItem('userInfo')
     setLogout(true)
   }
   return (
@@ -28,6 +29,7 @@ const Header = () => {
         <h1>We provide </h1>
         <h1>fresh vegetables ,</h1>
         <h1>Fruits and Plants</h1>
+        {/* <Loaderdesgin /> */}
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqa.

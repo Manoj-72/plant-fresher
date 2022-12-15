@@ -3,6 +3,7 @@ import { Cart, NavbarPage, Sidebar } from "../../components";
 import "./cartPage.css";
 import DATA from "../vegepage/data";
 import { useState } from "react";
+import { BiSad } from "react-icons/bi";
 
 const CartPage = () => {
   const [cartData, setCartData] = useState(DATA);
@@ -16,14 +17,32 @@ const CartPage = () => {
 
 
   const subtract = (index) => {
+    if (cartData[index].qty > 1) {
     cartData[index].qty = cartData[index].qty - 1;
-    cartData[index].price = cartData[index].price - cartData[index].initialPrice;
+    cartData[index].price = cartData[index].price - cartData[index].initialPrice;}
     setCartData([...cartData]);
   };
 
   const deleteCart = (index, cart) => {
     cartData.splice(index, 1);
+    setCartData([...cartData]);
   }
+
+  const cartFilter = (e) => {
+    if (e !== "clear") {
+      var inpValue = e.target.value;
+      let initialSearch = DATA.filter((element) =>
+        element.name.toLocaleLowerCase().includes(inpValue.toLocaleLowerCase())
+      );
+      setCartData(initialSearch);
+    } else {
+      var inpValue = "";
+      let initialSearch = cartData.filter((element) =>
+        element.name.toLocaleLowerCase().includes(inpValue.toLocaleLowerCase())
+      );
+      setCartData(cartData);
+    }
+  };
  
   const cards = cartData.map((cart, index) => {
     return (
@@ -42,19 +61,10 @@ const CartPage = () => {
     );
   });
 
-  // const billing = billData?.map((cart, index) =>{
-  //               <>
-  //               <div className="cart-items">
-  //                 <p>Carrot</p>
-  //                 <p>1kg</p>
-  //                 <p>{cart.price}</p>
-  //               </div>
-                
-  //               <div className="cartBuy-btn">
-  //                 <button>Buy</button>
-  //               </div>
-  //               </>
-  // })
+  let result = 0;
+  cartData.forEach(number => {
+  result += number.price;
+})
   
   return (
     <div className="App">
@@ -63,10 +73,10 @@ const CartPage = () => {
       </div>
       <div className="homePage-div cartPage-div">
         <div className="cartPage">
-          <NavbarPage title="vegetable" />
+          <NavbarPage title="vegetable" cartFilter={cartFilter} clearSearch={() => cartFilter("clear")}/>
           <h1>Cart</h1>
           <div className="cart-component">
-            <div className="cartPageBox">{cards}</div>
+           {cartData.length === 0 ? <div className="no-items"><h1>There is no item to show<BiSad style={{marginBottom:'-5px', marginLeft:'10px'}}/></h1></div>: <><div className="cartPageBox">{cards}</div>
             <div className="bill-board">
             <div className="cart-container">
                 <h1>Items</h1>
@@ -89,9 +99,13 @@ const CartPage = () => {
               }) 
               }
               </div>
+              <div className="cart-title">
+                  <p>Total Amount</p>
+                  <p>{`${result}Rs`}</p>
+                </div>
               </div>
             </div>
-          </div>
+          </>}</div>
         </div>
       </div>
     </div>
