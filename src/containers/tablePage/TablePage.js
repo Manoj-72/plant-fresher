@@ -1,6 +1,6 @@
-import React from 'react'
-import { NavbarPage, Sidebar, Table } from '../../components'
-import './TablePage.css'
+import React from "react";
+import { NavbarPage, Sidebar, Table } from "../../components";
+import "./TablePage.css";
 
 const TablePage = () => {
   return (
@@ -9,12 +9,12 @@ const TablePage = () => {
         <Sidebar />
       </div>
       <div className="homePage-div">
-      <div className='vegetable'>
-        <Table />
-       </div>
+        <div className="vegetable">
+          <Table />
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TablePage
+export default TablePage;

@@ -24,62 +24,62 @@ table > tbody > tr > td:nth-child(3) {
 table > tbody > tr > td:nth-child(4) {
   padding-left: 55px;
 } */
-table > thead > tr > th:nth-child(2){
-  padding-right:30px;
+table > thead > tr > th:nth-child(2) {
+  padding-right: 30px;
 }
-.snum-td{
+.snum-td {
   padding-left: 60px;
 }
-.name-td{
+.name-td {
   padding-left: 75px;
   padding-right: -29px;
 }
-.tag-td{
+.tag-td {
   padding-left: 70px;
 }
-.date-td{
+.date-td {
   padding-left: 65px;
 }
-.price-td{
+.price-td {
   padding-left: 67px;
 }
-.action-td{
+.action-td {
   padding-left: 48px;
 }
-.input-td1{
+.input-td1 {
   padding-left: 40px;
 }
-.input-td2{
+.input-td2 {
   padding-left: 45px;
 }
-.input-td3{
+.input-td3 {
   padding-left: 45px;
 }
-.input-td4{
+.input-td4 {
   padding-left: 50px;
 }
-.input-td5{
+.input-td5 {
   padding-left: 50px;
 }
-.input-td6{
+.input-td6 {
   padding-left: 65px;
 }
-.edit-btn{
+.edit-btn {
   padding-left: 20px;
 }
-.table-input1{
+.table-input1 {
   width: 50px !important;
 }
-.table-input2{
+.table-input2 {
   width: 100px !important;
 }
-.table-input3{
+.table-input3 {
   width: 60px !important;
 }
-.table-input4{
-  width: 100px!important;
+.table-input4 {
+  width: 100px !important;
 }
-.table-input5{
+.table-input5 {
   width: 50px !important;
 }
 table > tbody > tr {
@@ -165,7 +165,6 @@ table th:nth-child(6) {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  
 }
 .modalInner,
 .modalInnerTwo {
@@ -173,12 +172,12 @@ table th:nth-child(6) {
   align-items: flex-start;
   flex-direction: column;
 }
-.modalInner p{
+.modalInner p {
   font-weight: 500;
   font-size: 18px;
   line-height: 36px;
 }
-.modalInnerTwo p{
+.modalInnerTwo p {
   font-weight: 400;
   font-size: 17px;
   line-height: 36px;
@@ -193,8 +192,8 @@ table th:nth-child(6) {
   outline: none;
   border-bottom: 1px solid #289402;
 }
-.modalInnerTwo input:nth-child(1){
+.modalInnerTwo input:nth-child(1) {
   margin-top: 28px;
-  
+
   margin-bottom: 27px;
 }

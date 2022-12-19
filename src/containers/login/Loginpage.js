@@ -1,20 +1,22 @@
-import React from 'react'
-import { Login } from '../../components'
-import './Loginpage.css'
+import React from "react";
+import { Login } from "../../components";
+import "./Loginpage.css";
 
 const Loginpage = () => {
   return (
-    <div className='loginpage-pg'>
-        <Login title="Login"
+    <div className="loginpage-pg">
+      <Login
+        title="Login"
         des="Sign in and start managing your candidates!"
         placeholder="Mobile no"
         forget="Forget password?"
-        button='Login'/>
+        button="Login"
+      />
     </div>
-  )
-}
+  );
+};
 
-export default Loginpage
+export default Loginpage;
 // let obj ={
 //   title:"Login",
 //       des:"Sign in and start managing your candidates!",

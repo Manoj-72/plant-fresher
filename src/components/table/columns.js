@@ -3,16 +3,13 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import swal from "sweetalert";
 import MOCK_DATA from "./MOCK_DATA";
 
-
-
 const handleData = (row) => {
   //  for (var i = MOCK_DATA; i < MOCK_DATA.length; i++) {
   // console.log(
   //   `Name :${MOCK_DATA[i].name}\n Tag no :${MOCK_DATA[i].tag_number}\n Date of purchase :${MOCK_DATA[i].date}\n Price :${MOCK_DATA[i].price}`
   // );
-  console.log(row,"check")
-}
-
+  console.log(row, "check");
+};
 
 export const COLUMNS = [
   {

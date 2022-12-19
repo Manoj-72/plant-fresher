@@ -24,6 +24,8 @@ const Login = (props) => {
 
   const [err, setErr] = useState(false);
 
+  const [errMessage, setErrMessage] = useState("");
+
   const loginOperation = async (e) => {
     e.preventDefault();
     if (!loginMobileNumber.length || !loginPassword.length) return;
@@ -53,7 +55,8 @@ const Login = (props) => {
     } catch (err) {
       setLoading(false);
       setErr(true);
-      console.log(err)
+      setErrMessage(err.response.data.error);
+      console.error(err)
     }
   };
 
@@ -62,7 +65,7 @@ const Login = (props) => {
       localStorage.setItem("email", email.current.value);
       localStorage.setItem("password", password.current.value);
       localStorage.setItem("logIn", email.current.value);
-      
+
       navigate("/");
       console.log(localSignup);
     }
@@ -183,8 +186,8 @@ const Login = (props) => {
           <button className="loginBtn" type="submit" onClick={loginOperation}>
             {props.button}
           </button>
-          
-        )}{err && <p className="invalid-err">Invalid username or password</p>}
+        )}
+        {err && <p className="invalid-err">{errMessage}</p>}
 
         {props.title === "Forget password" && (
           <h3 className="forgetHeading">{props.title}</h3>

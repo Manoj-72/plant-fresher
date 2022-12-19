@@ -5,7 +5,6 @@ import { BsCart4 } from "react-icons/bs";
 import "./Cart.css";
 
 const Cart = (props) => {
- 
   return (
     <div>
       <div className="cart">
@@ -23,14 +22,20 @@ const Cart = (props) => {
                 <h5>{`$${props.price}`}</h5>
                 <div className="cardButtonBox">
                   <div className="cartCounter">
-                    <button onClick={props.subtract}>-</button>
+                    <button style={{cursor:'pointer'}} onClick={props.subtract}>-</button>
                     <div className="cartCountText">
                       <p>{props.count}</p>
                     </div>
-                    <button onClick={props.add}>+</button>
+                    <button style={{cursor:'pointer'}} onClick={props.add}>+</button>
                   </div>
                   <button className="delToCart" onClick={props.deleteCart}>
-                    <AiOutlineDelete style={{ fontSize: "12", marginRight: "5px", marginBottom:'-2px' }} />
+                    <AiOutlineDelete
+                      style={{
+                        fontSize: "12",
+                        marginRight: "5px",
+                        marginBottom: "-2px",
+                      }}
+                    />
                     {props.delButton}
                   </button>
                 </div>

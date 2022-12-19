@@ -6,10 +6,8 @@ import { GiTomato, GiFruitBowl } from "react-icons/gi";
 import { BsCart2 } from "react-icons/bs";
 import { CiViewTable } from "react-icons/ci";
 import { NavLink } from "react-router-dom";
-
-
-
-
+import 'react-tooltip/dist/react-tooltip.css'
+import { Tooltip } from "react-tooltip";
 
 const Sidebar = () => {
   const activeLink = "activeLink";
@@ -17,55 +15,60 @@ const Sidebar = () => {
 
   let sidebarObj = [
     {
-    key:1,
-    name:"Home",
-    navTo:"/",
-    icon: AiOutlineHome,
+      key: 1,
+      name: "Home",
+      navTo: "/",
+      icon: AiOutlineHome,
     },
     {
-      key:2,
-      name:"Vegetable",
-      navTo:"/vegetables",
+      key: 2,
+      name: "Vegetable",
+      navTo: "/vegetables",
       icon: GiTomato,
     },
     {
-      key:3,
-      name:"Cart",
-      navTo:"/cart",
+      key: 3,
+      name: "Cart",
+      navTo: "/cart",
       icon: BsCart2,
     },
     {
-      key:4,
-      name:"Product details",
-      navTo:"/table",
+      key: 4,
+      name: "Product details",
+      navTo: "/table",
       icon: CiViewTable,
-    }
-
-]
-
+    },
+  ];
 
   return (
     <div className="sideBar">
       <div className="sideBarButton">
         <HiMenuAlt1
+        id="menu"
           style={{ fontSize: 30, color: "#49A010", cursor: "pointer" }}
         />
+        <Tooltip anchorId="menu" content="Menu" place="bottom" offset={13} />
       </div>
       <div className="sideBarMenu">
-        {sidebarObj.map(item => {
-    return <div className="sideBarMenuItem" key={item.key}>
-          <NavLink
-            to={item.navTo}
-            className={({ isActive }) => (isActive ? activeLink : normalLink)}
-          >
-            <item.icon key={item.id}
-              style={{ fontSize: 20, color: activeLink, cursor: "pointer" }}
-            />
-            <h4>{item.name}</h4>
-          </NavLink>
-        </div>
-  })}
-      </div> 
+        {sidebarObj.map((item) => {
+          return (
+            <div className="sideBarMenuItem" key={item.key}>
+              <NavLink
+                to={item.navTo}
+                className={({ isActive }) =>
+                  isActive ? activeLink : normalLink
+                }
+              >
+                <item.icon
+                  key={item.id}
+                  style={{ fontSize: 20, color: activeLink, cursor: "pointer" }}
+                />
+                <h4>{item.name}</h4>
+              </NavLink>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

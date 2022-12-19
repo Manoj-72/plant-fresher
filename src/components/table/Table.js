@@ -24,12 +24,22 @@ const Table = () => {
       price: 0,
     },
   ]);
+  const [isAddOpen, setAddIsOpen] = useState(false);
+  const [modalAddDetails, setModalAddDetails] = useState([
+    {
+      name: "",
+      id: 0,
+      tag_number: 0,
+      date: moment(new Date()).format("YYYY-MM-DD"),
+      price: 0,
+    },
+  ]);
   const [serielNum, setSerielNum] = useState();
   const [nameValue, setNameValue] = useState("");
   const [tagValue, setTagValue] = useState();
-  const [dateValue, setDateValue] = useState("");
+  const [dateValue, setDateValue] = useState(moment(new Date()).format("YYYY-MM-DD"));
   const [priceValue, setPriceValue] = useState();
-  const [deleteIndex, setDeleteIndex] = useState()
+  const [deleteIndex, setDeleteIndex] = useState();
   const [dateFilters, setDateFilters] = useState({});
 
   console.log(moment(dateFilters.start).format("DD-MM-YYYY"));
@@ -54,32 +64,37 @@ const Table = () => {
   const toggleDeleteModal = (item, index) => {
     setModalEditDetails(item);
     setDeleteIndex(index);
-    setIsOpen(!isOpen);
+    setIsOpen(!isOpen); 
   };
 
   const toggleEditModal = (item, index) => {
     setModalEditDetails(item);
-    
+
     setEditIsOpen(!isEditOpen);
+  };
+  const toggleAddModal = (item, index) => {
+    setModalAddDetails(item);
+
+    setAddIsOpen(!isAddOpen);
   };
 
   const filteredObj = tableData.map((item, index) => {
     return (
       <>
         <tr>
-          <td className="snum-td">{item.id}</td>
+          <td className="snum-td">{index + 1}</td>
           <td className="name-td">{item.name}</td>
           <td className="tag-td">{item.tag_number}</td>
           <td className="date-td">{item.date}</td>
           <td className="price-td">{item.price}</td>
           <td className="action-td">
             <FiEdit
-              style={{ fontSize: "22px" }}
+              style={{ fontSize: "22px",cursor:'pointer' }}
               onClick={() => toggleEditModal(item, index)}
             />
             <RiDeleteBinLine
               className="edit-btn"
-              style={{ fontSize: "22px" }}
+              style={{ fontSize: "22px",cursor:'pointer'}}
               onClick={() => toggleDeleteModal(item, index)}
             />
           </td>
@@ -96,21 +111,25 @@ const Table = () => {
     price: priceValue,
   };
 
-  const addSubmit = () => {
+  const addSubmit = (index) => {
+    setAddIsOpen(!isAddOpen);
     console.log([...tableData, newData], "checkadd");
     setTableData([...tableData, newData]);
-    setSerielNum("");
+    setSerielNum(index + 1);
     setNameValue("");
     setDateValue("");
     setPriceValue("");
     setTagValue("");
   };
+  
   useEffect(() => {
     console.log(tableData, "checktable");
   }, [tableData]);
 
   const handleEdit = () => {
-    setModalEditDetails((prev) => (prev, tableData[modalEditDetails.id - 1] = modalEditDetails))
+    setModalEditDetails(
+      (prev) => (prev, (tableData[modalEditDetails.id - 1] = modalEditDetails))
+    );
     console.log(modalEditDetails);
     // tableData[modalEditDetails.id - 1].name = modalEditDetails.name;
     // tableData[modalEditDetails.id - 1].tag_number = editTagno;
@@ -118,10 +137,20 @@ const Table = () => {
     // tableData[modalEditDetails.id - 1].price = editPrice;
     setEditIsOpen(!isEditOpen);
   };
-  
+  const handleAdd = () => {
+    setModalAddDetails(
+      (prev) => (prev, (tableData[modalEditDetails.id - 1] = modalEditDetails))
+    );
+    // tableData[modalEditDetails.id - 1].name = modalEditDetails.name;
+    // tableData[modalEditDetails.id - 1].tag_number = editTagno;
+    // tableData[modalEditDetails.id - 1].date = editDate;
+    // tableData[modalEditDetails.id - 1].price = editPrice;
+    setAddIsOpen(!isAddOpen);
+  };
+
   const handleDelete = () => {
     tableData.splice(deleteIndex, 1);
-    setIsOpen(!isOpen)
+    setIsOpen(!isOpen);
   };
 
   const searchWithDate = () => {
@@ -134,7 +163,7 @@ const Table = () => {
             new Date(date) <= dateFilters.end
         )
       );
-      console.log(dateFilters.start)
+    console.log(tableData);
   };
   const setDateFilter = (e, type) => {
     setDateFilters((prevState) => ({
@@ -156,6 +185,7 @@ const Table = () => {
         searchWithDate={searchWithDate}
         setDateFilter={setDateFilter}
         clearSearch={() => filterName("clear")}
+        toggleAddModal={toggleAddModal}
         // startDate={setStartDate}
         // endDate={endDate}
         // firstDate={firstDate}
@@ -174,17 +204,17 @@ const Table = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="input-td1">
+            {/* <tr>
+               <td className="input-td1">
                 <input
                   className="table-input table-input1"
                   type="number"
-                  onChange={(e) => setSerielNum(e.target.value)}
+                  onChange={(index) => setSerielNum(index)}
                   value={serielNum}
                   placeholder="S.no"
                   min="0"
                 />
-              </td>
+              </td> 
               <td className="input-td2">
                 <input
                   className="table-input table-input2"
@@ -208,6 +238,7 @@ const Table = () => {
                   className="table-input table-input4"
                   onChange={(e) => setDateValue(e.target.value)}
                   value={dateValue}
+                  style={{cursor:'pointer' }}
                   type="date"
                   placeholder="Date of purchase"
                 />
@@ -223,12 +254,83 @@ const Table = () => {
                 />
               </td>
               <td className="input-td6">
-                <GrFormAdd style={{ fontSize: "28px" }} onClick={addSubmit} />
+                <GrFormAdd style={{ fontSize: "28px",cursor:'pointer' }} onClick={addSubmit} />
               </td>
-            </tr>
+            </tr> */}
             {filteredObj}
           </tbody>
         </table>
+
+        {/* Add ---------------------------------------------------------------------------------------- */}
+
+
+        <Modal
+          isOpen={isAddOpen}
+          onRequestClose={() => setAddIsOpen(!isAddOpen)}
+          style={{
+            overlay: {
+              backgroundColor: "rgba(0,0,0,0.3)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            },
+            content: {
+              width: "359px",
+              borderRadius: "10px",
+              position: "absolute",
+              top: "20%",
+              left: "35%",
+              height: "480px",
+              textAlign: "center",
+            },
+          }}
+        >
+          <div className="modalContainer">
+            <div className="modalHeader">
+              <h2>Add details</h2>
+            </div>
+            <div className="modalBody">
+              <div className="modalInner">
+                <p>Name</p>
+                <p>Tag no</p>
+                <p>Date of purchase</p>
+                <p>Pay detail</p>
+              </div>
+              <div className="modalInnerTwo">
+                <input
+                  onChange={(e) => setNameValue(e.target.value)}
+                  value={nameValue}
+                  placeholder="Name"
+                />
+                <input
+                  type="number"
+                  onChange={(e) => setTagValue(e.target.value)}
+                  value={tagValue}
+                  min="0"
+                  placeholder="Tag No"
+                />
+                <input
+                  onChange={(e) => setDateValue(e.target.value)}
+                  value={dateValue}
+                  style={{cursor:'pointer' }}
+                  type="date"
+                  placeholder="Date of purchase"
+                />
+                <input
+                  min="0"
+                  onChange={(e) => setPriceValue(e.target.value)}
+                  value={priceValue}
+                  placeholder="Price"
+                />
+              </div>
+            </div>
+            <button onClick={addSubmit}>SAVE</button>
+          </div>
+        </Modal>
+
+
+       {/* Edit ---------------------------------------------------------------------------------------- */}
+
         <Modal
           isOpen={isEditOpen}
           onRequestClose={() => setEditIsOpen(!isEditOpen)}
@@ -326,6 +428,10 @@ const Table = () => {
             <button onClick={handleEdit}>SAVE</button>
           </div>
         </Modal>
+
+        {/* Delete ---------------------------------------------------------------------------------------- */}
+
+
         <Modal
           isOpen={isOpen}
           onRequestClose={() => setIsOpen(!isOpen)}

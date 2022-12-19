@@ -12,10 +12,18 @@
   width: 78%;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
-  background:linear-gradient(135deg, rgba(229, 255, 227, 1) 1%, rgba(164, 255, 157, 1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(229, 255, 227, 1) 1%,
+    rgba(164, 255, 157, 1) 100%
+  );
 }
-.loginpage-pg{
-  background:linear-gradient(135deg, rgba(229, 255, 227, 1) 1%, rgba(164, 255, 157, 1) 100%);
+.loginpage-pg {
+  background: linear-gradient(
+    135deg,
+    rgba(229, 255, 227, 1) 1%,
+    rgba(164, 255, 157, 1) 100%
+  );
 }
 .table-icons {
   display: flex;
@@ -27,7 +35,7 @@
   text-align: left;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
 }
 ::-webkit-scrollbar {
   width: 10px;

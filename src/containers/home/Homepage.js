@@ -1,7 +1,7 @@
-import React from 'react'
-import { Sidebar } from '../../components'
-import { Header } from '../../components'
-import './Home.css'
+import React from "react";
+import { Sidebar } from "../../components";
+import { Header } from "../../components";
+import "./Home.css";
 
 const Homepage = () => {
   return (
@@ -13,7 +13,7 @@ const Homepage = () => {
         <Header />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Homepage
+export default Homepage;

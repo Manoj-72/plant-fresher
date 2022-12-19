@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import { GiThreeLeaves } from "react-icons/gi";
@@ -6,17 +6,16 @@ import { FaLeaf, FaShippingFast } from "react-icons/fa";
 import { NavbarPage } from "../../components";
 
 const Header = () => {
-  
-  const [logout, setLogout] = useState(false)
+  const [logout, setLogout] = useState(false);
   const logOut = () => {
-    localStorage.removeItem('userInfo')
-    setLogout(true)
-  }
+    localStorage.removeItem("userInfo");
+    setLogout(true);
+  };
   return (
     <div className="homePage">
       <NavbarPage
-        key='homeKey'
-        title='home'
+        key="homeKey"
+        title="home"
         skip="Skip"
         logout={<button onClick={logOut}>Logout</button>}
         login={
