@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import swal from "sweetalert";
 import "./Login.css";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { NavbarPage } from "../../components";
 import { Icon } from "react-icons-kit";
 import { eye } from "react-icons-kit/feather/eye";
@@ -15,20 +15,20 @@ const Login = (props) => {
 
   const navigate = useNavigate();
   const localSignup = localStorage.getItem("logIn");
-
   const [loginMobileNumber, setLoginMobileNumber] = useState("");
-
   const [loginPassword, setLoginPassword] = useState("");
-
+  const [signupName, setSignupName] = useState("");
+  const [signupMobileNumber, setSignupMobileNumber] = useState("");
+  const [signupPassword, setSignupPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
   const [err, setErr] = useState(false);
-
   const [errMessage, setErrMessage] = useState("");
 
   const loginOperation = async (e) => {
     e.preventDefault();
-    if (!loginMobileNumber.length || !loginPassword.length) return;
+    if (!loginMobileNumber.length || !loginPassword.length) {
+      alert("Please enter vaild details");
+    } else {
     setLoading(true);
     try {
       let Data =
@@ -47,25 +47,64 @@ const Login = (props) => {
       });
       localStorage.setItem("userInfo", JSON.stringify(response));
       swal({
-        title: "Logged in successfully!",
+        title: `Logged in successfully!`,
         icon: "success",
         dangerMode: false,
       });
       navigate("/");
+      
+      
     } catch (err) {
       setLoading(false);
       setErr(true);
       setErrMessage(err.response.data.error);
-      console.error(err)
+      console.error(err);
     }
+  }
   };
-
+ const singupOperation = async (e) => {
+  e.preventDefault();
+  if (!signupName.length|| !signupMobileNumber.length || !signupPassword.length){
+    alert("Please enter vaild details");
+  } else {
+    setLoading(true);
+  try {
+    let signupData =
+    "phNum=" +
+      signupMobileNumber +
+    "&name=" + signupName +
+      "&password=" +
+      signupPassword +
+      "&type=cart";
+    const response = await axios({
+      method: "POST",
+      url: "https://fioritest.avaniko.com/User/AddUser",
+      data: signupData,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    }).then((res) => console.log(res.data))
+    .catch((error) => console.log(error.response.data.error));
+    localStorage.setItem("signupInfo", JSON.stringify(response))
+    swal({
+      title: `Account created successfully`,
+      icon: "success",
+      dangerMode: false,
+    });
+    navigate('/login')
+  } 
+  catch (err) {
+    setLoading(false);
+      setErr(true);
+      setErrMessage(err.response.data.error);
+      console.error(err);
+  }
+}};
   const handleClick = () => {
     if (email.current.value && password.current.value) {
       localStorage.setItem("email", email.current.value);
       localStorage.setItem("password", password.current.value);
       localStorage.setItem("logIn", email.current.value);
-
       navigate("/");
       console.log(localSignup);
     }
@@ -153,7 +192,7 @@ const Login = (props) => {
 
   return (
     <div className="login">
-      <NavbarPage />
+      <NavbarPage title='login' username="loginName" />
       <div className="loginCard">
         {props.title === "Login" && (
           <h3 className="loginHeading">{props.title}</h3>
@@ -161,8 +200,10 @@ const Login = (props) => {
         {props.title === "Login" && <p className="loginPara">{props.des}</p>}
         {props.title === "Login" && (
           <input
+          autoFocus
             className="loginInput"
             type="text"
+            id="loginFocus"
             placeholder={props.placeholder}
             // ref={email}
             onChange={(e) => setLoginMobileNumber(e.target.value)}
@@ -188,6 +229,55 @@ const Login = (props) => {
           </button>
         )}
         {err && <p className="invalid-err">{errMessage}</p>}
+        {props.title === "Login" && (
+          <Link to="/signup">
+            <p className="signup">{props.signup}</p>{" "}
+          </Link>
+        )}
+        {props.title === "Signup" && (
+          <h3 className="loginHeading">{props.title}</h3>
+        )}
+        {props.title === "Signup" && <p className="loginPara">{props.para}</p>}
+        {props.title === "Signup" && (
+          <input
+          autoFocus
+            className="loginInput"
+            type="text"
+            placeholder="Name"
+            onChange={(e) => setSignupName(e.target.value)}
+            // ref={password}
+          />
+        )}
+        {props.title === "Signup" && (
+          <input
+            className="loginInput"
+            type="text"
+            placeholder={props.placeholder}
+            // ref={email}
+            onChange={(e) => setSignupMobileNumber(e.target.value)}
+          />
+        )}
+        {props.title === "Signup" && (
+          <input
+            className="loginInput"
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setSignupPassword(e.target.value)}
+            // ref={password}
+          />
+        )}
+        {err && <p className="invalid-err">{errMessage}</p>}
+        {props.title === "Signup" && (
+          <button className="loginBtn" type="submit" onClick={singupOperation}>
+            {props.button}
+          </button>
+        )}
+        
+        {props.title === "Signup" && (
+          <Link to="/signup">
+            <p className="signup">{props.signup}</p>{" "}
+          </Link>
+        )}
 
         {props.title === "Forget password" && (
           <h3 className="forgetHeading">{props.title}</h3>

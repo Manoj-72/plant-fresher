@@ -11,6 +11,7 @@ const Loginpage = () => {
         placeholder="Mobile no"
         forget="Forget password?"
         button="Login"
+        signup="New User?"
       />
     </div>
   );

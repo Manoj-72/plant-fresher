@@ -6,3 +6,4 @@ export { default as VegePage } from "./vegepage/VegePage";
 export { default as CartPage } from "./cartPage/cartPage";
 export { default as TablePage } from "./tablePage/TablePage";
 export { default as ResetPwd } from "./reset/ResetPwd";
+export { default as Signup } from "./signup/Signup";

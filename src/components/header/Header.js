@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 import "./Header.css";
 import { GiThreeLeaves } from "react-icons/gi";
 import { FaLeaf, FaShippingFast } from "react-icons/fa";
@@ -7,16 +7,28 @@ import { NavbarPage } from "../../components";
 
 const Header = () => {
   const [logout, setLogout] = useState(false);
+  const [name, setName] = useState("");
   const logOut = () => {
     localStorage.removeItem("userInfo");
     setLogout(true);
   };
+  useEffect(()=>{
+    if(localStorage.getItem("userInfo")){
+     let  userName = JSON.parse(localStorage.getItem("userInfo")).data.UserName.charAt(0).toUpperCase() + JSON.parse(localStorage.getItem("userInfo")).data.UserName.slice(1).toLowerCase();
+     setName(`Hi ${userName},`)
+    }
+     else{
+      setName("")
+     }
+  },[])
+  
   return (
     <div className="homePage">
       <NavbarPage
         key="homeKey"
         title="home"
         skip="Skip"
+        username={name}
         logout={<button onClick={logOut}>Logout</button>}
         login={
           <Link to="/login">

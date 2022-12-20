@@ -3,6 +3,7 @@ import {
   CartPage,
   Homepage,
   ResetPwd,
+  Signup,
   TablePage,
   VegePage,
   Verification,
@@ -25,6 +26,7 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/table" element={<TablePage />} />
         <Route path="/loader" element={<Loaderdesign />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </Router>
   );

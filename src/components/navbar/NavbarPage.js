@@ -13,19 +13,6 @@ export const startDate = (e) => {};
 export const endDate = (e) => {};
 
 const NavbarPage = (props) => {
-  const [dateFilters, setDateFilters] = useState({});
-  const [search, setSearch] = useState("");
-
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-  };
-
-  const clearSearch = () => {
-    setSearch("");
-  };
-
-  const todayDate = moment(new Date()).format("YYYY-MM-DD");
-
   return (
     <div className="navBar">
       <div className="navBarLeft">
@@ -34,6 +21,7 @@ const NavbarPage = (props) => {
         <h3>
           Plants <span>Fresher</span>
         </h3>
+        
       </div>
       {props.title === "vegetable" && (
         <div className="navbar-searchBox">
@@ -64,12 +52,9 @@ const NavbarPage = (props) => {
       )}
       <div className="navBarRight">
         {localStorage.getItem("userInfo") ? (
-          <p>{props.nothing}</p>
-        ) : (
-          <p>{props.skip}</p>
-        )}
-        {localStorage.getItem("userInfo") ? (
-          <>{props.logout} </>
+          <>
+          <p className="UserName">{props.username}</p>
+          {props.logout} </>
         ) : (
           <>{props.login}</>
         )}
