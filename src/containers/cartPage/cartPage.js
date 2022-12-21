@@ -4,20 +4,25 @@ import "./cartPage.css";
 import DATA from "../vegepage/data";
 import { useState } from "react";
 import { BiSad } from "react-icons/bi";
+import emptycart from "../../assets/emptycart.gif";
+import Lottie from "react-lottie";
+import animationData from "../../lottie/emptyCart.json";
 
 const CartPage = () => {
   const [cartData, setCartData] = useState(DATA);
 
   const add = (index, cart) => {
     cartData[index].qty = cartData[index].qty + 1;
-    cartData[index].price = cartData[index].price + cartData[index].initialPrice;
+    cartData[index].price =
+      cartData[index].price + cartData[index].initialPrice;
     setCartData([...cartData]);
   };
 
   const subtract = (index) => {
     if (cartData[index].qty > 1) {
       cartData[index].qty = cartData[index].qty - 1;
-      cartData[index].price = cartData[index].price - cartData[index].initialPrice;
+      cartData[index].price =
+        cartData[index].price - cartData[index].initialPrice;
     }
     setCartData([...cartData]);
   };
@@ -65,6 +70,15 @@ const CartPage = () => {
     result += number.price;
   });
 
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
   return (
     <div className="App">
       <div className="sideBar-div">
@@ -81,10 +95,9 @@ const CartPage = () => {
           <div className="cart-component">
             {cartData.length === 0 ? (
               <div className="no-items">
-                <h1>
-                  There is no item to show
-                  <BiSad style={{ marginBottom: "-5px", marginLeft: "10px" }} />
-                </h1>
+                <Lottie options={defaultOptions} height={400} width={400} />
+                {/* <h1>There is nothing to show</h1>
+                <BiSad style={{fontSize:'30px', marginTop:'-28px', marginLeft:'8px', color:'#3a7f0d'}} /> */}
               </div>
             ) : (
               <>

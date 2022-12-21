@@ -83,8 +83,10 @@ const Login = (props) => {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-    }).then((res) => console.log(res.data))
-    .catch((error) => console.log(error.response.data.error));
+    }) 
+    if (response.data !== 'User already exists'){
+    // .then((res) => console.log(res.data))
+    // .catch((error) => console.log(error.response.data.error));
     localStorage.setItem("signupInfo", JSON.stringify(response))
     swal({
       title: `Account created successfully`,
@@ -92,12 +94,16 @@ const Login = (props) => {
       dangerMode: false,
     });
     navigate('/login')
-  } 
+    console.log(response)
+  } else {
+    alert('User already exist')
+  }
+  }
   catch (err) {
-    setLoading(false);
-      setErr(true);
-      setErrMessage(err.response.data.error);
-      console.error(err);
+    // setLoading(false);
+    //   setErr(true);
+    //   setErrMessage(err.response.data.error);
+    //   console.error(err);
   }
 }};
   const handleClick = () => {
@@ -266,7 +272,7 @@ const Login = (props) => {
             // ref={password}
           />
         )}
-        {err && <p className="invalid-err">{errMessage}</p>}
+        {/* {err && <p className="invalid-err">{errMessage}</p>} */}
         {props.title === "Signup" && (
           <button className="loginBtn" type="submit" onClick={singupOperation}>
             {props.button}
