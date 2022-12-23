@@ -7,20 +7,23 @@ import {
 } from "../../components";
 import "./VegePage.css";
 import DATA from "./data";
+import { useSelector } from "react-redux";
 
 const VegePage = () => {
-  const vegcards = DATA.map((item) => {
-    return (
-      <Vegetable
-        key={item.id}
-        img={item.coverImg}
-        name={item.name}
-        price={item.price}
-        addButton={item.addButton}
-        share={item.share}
-      />
-    );
-  });
+  const vegcards = DATA.map((product) =>(
+    <Vegetable
+    key={product.id}
+    id={product.id}
+    name={product.name}
+    img={product.coverImg}
+    share={product.share}
+    addButton={product.addButton}
+    delButton={product.delButton}
+    title={product.title}
+    price={product.price}
+    description={product.description}
+  />
+  ))
   return (
     <div className="App">
       <div className="sideBar-div">

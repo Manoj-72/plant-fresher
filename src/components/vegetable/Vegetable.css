@@ -65,13 +65,13 @@
   color: #ffffff;
 }
 .addToCart {
-  background: #289402;
   border-radius: 4px;
-  border: 1px solid #289402;
-  color: #ffffff;
-  font-weight: 600;
+  background-color: rgb(247, 255, 249) !important;
+  border: 0.5px solid rgb(12, 131, 31);
+  color: rgb(12, 131, 31) !important;
+  font-weight: 900 !important;
   font-size: 12px;
-  padding: 3px 7px;
+  padding: 7px 20px !important;
   cursor: pointer;
   outline: none;
 }

@@ -2,62 +2,78 @@ import React, { useState } from "react";
 import "./Vegetable.css";
 import { BsCart4 } from "react-icons/bs";
 import { AiOutlineShareAlt } from "react-icons/ai";
+import { cartActions } from "../../store/cart-slice";
+import { useDispatch } from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/ReactToastify.min.css";
 
 const Vegetable = (props) => {
-  const [count, setCount] = useState(0);
+  const dispatch = useDispatch();
+   
 
-  // function add() {
-  //     setCount(function(oldValue) {
-  //         return oldValue + 1
-  //     })
-  // }
-  const add = () => {
-    setCount(count + 1);
-  };
+  const { name, price, id, img, quantity, addButton, delButton, share} = props;
 
-  function subtract() {
-    if (count > 0) {
-      setCount(count - 1);
+  const addToCartHandler = () => {
+    dispatch(
+      cartActions.addItemToCart({
+        id,
+        name,
+        img,
+        price,
+      })
+    );
+    toast("Added to cart",{type:'success'});
+    };
+    const addItemHandler = () => {
+      dispatch(cartActions.addItemToCart({
+        id,
+        name,
+        price,
+        img,
+        quantity,
+      }))
     }
-  }
-
-  const highLigtht = () => {
-    if (props.name === "brokoli") {
-      return;
+    const removeItemHandler = () => {
+      dispatch(cartActions.removeItemFromCart(id))
     }
-  };
-
-  // let badge
-  // if () {
-  //     badge =
-  // }
-
+    console.log('test', cartActions.addItemToCart(props))
+  
   return (
+    <>
     <div className="vegetableCard ">
-      {props.share === true && (
+      {share === true && (
         <div className="shareBadge">
           <AiOutlineShareAlt style={{ fontSize: "22" }} />
         </div>
       )}
-      <img src={`../../images/${props.img}`} className="vegetableImg" />
+      <img src={`../../images/${img}`} className="vegetableImg" />
       <div className="cardNameBox">
-        <h4>{props.name}</h4>
-        <h5>{`$${props.price}`}</h5>
+        <h4>{name}</h4>
+        <h5>{`$${price}`}</h5>
         <div className="cardButtonBox">
-          <div className="vegetableCounter">
-            <button onClick={subtract}>-</button>
+          {/* <div className="vegetableCounter">
+            <button onClick={removeItemHandler}>-</button>
             <div className="vegetableCountText">
-              <p>{count}</p>
+              <p>{quantity}</p>
             </div>
-            <button onClick={add}>+</button>
-          </div>
-          <button className="addToCart">
-            <BsCart4 style={{ fontSize: "12", marginRight: "5px" }} />
-            {props.addButton}
+            <button onClick={addItemHandler}>+</button>
+          </div> */}
+          <button className="addToCart" onClick={addToCartHandler}>
+            ADD
           </button>
         </div>
       </div>
     </div>
+    <ToastContainer
+    position="bottom-left"
+    autoClose={1500}
+    hideProgressBar={false}
+    newestOnTop={true}
+    closeOnClick
+    rtl={false}
+    theme="light"
+    />
+    </>
   );
 };
 

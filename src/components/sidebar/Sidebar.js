@@ -8,8 +8,10 @@ import { CiViewTable } from "react-icons/ci";
 import { NavLink } from "react-router-dom";
 import 'react-tooltip/dist/react-tooltip.css'
 import { Tooltip } from "react-tooltip";
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
+  const badgeValue = useSelector(state => state.cart.totalQuantity)
   const activeLink = "activeLink";
   const normalLink = "defaultLink";
 
@@ -61,9 +63,10 @@ const Sidebar = () => {
               >
                 <item.icon
                   key={item.id}
-                  style={{ fontSize: 20, color: activeLink, cursor: "pointer" }}
+                  style={{ fontSize: 20, color: activeLink, zIndex:'1',cursor: "pointer" }}
                 />
-                <h4>{item.name}</h4>
+                
+                <h4>{item.name}</h4>{item.key === 3 && <p className="cartBadge">{badgeValue}</p>}
               </NavLink>
             </div>
           );

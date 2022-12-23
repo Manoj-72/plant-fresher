@@ -47,3 +47,17 @@
 #menu {
   outline: none;
 }
+.cartBadge {
+  position: absolute;
+  left: 27px;
+  top: 268px;
+  background-color: red;
+  color: #fff;
+  border-radius: 50%;
+  width:  20px;
+  height: 20px;
+  font-size: 13px;
+  text-align: center;
+  margin-left: 0px;
+  padding-bottom: 0px;
+}

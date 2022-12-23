@@ -7,68 +7,48 @@ import { BiSad } from "react-icons/bi";
 import emptycart from "../../assets/emptycart.gif";
 import Lottie from "react-lottie";
 import animationData from "../../lottie/emptyCart.json";
+import { useSelector } from "react-redux";
 
 const CartPage = () => {
-  const [cartData, setCartData] = useState(DATA);
 
-  const add = (index, cart) => {
-    cartData[index].qty = cartData[index].qty + 1;
-    cartData[index].price =
-      cartData[index].price + cartData[index].initialPrice;
-    setCartData([...cartData]);
-  };
+  // const cartFilter = (e) => {
+  //   if (e !== "clear") {
+  //     var inpValue = e.target.value;
+  //     let initialSearch = DATA.filter((element) =>
+  //       element.name.toLocaleLowerCase().includes(inpValue.toLocaleLowerCase())
+  //     );
+  //     setCartData(initialSearch);
+  //   } else {
+  //     var inpValue = "";
+  //     let initialSearch = cartData.filter((element) =>
+  //       element.name.toLocaleLowerCase().includes(inpValue.toLocaleLowerCase())
+  //     );
+  //     setCartData(cartData);
+  //   }
+  // };
 
-  const subtract = (index) => {
-    if (cartData[index].qty > 1) {
-      cartData[index].qty = cartData[index].qty - 1;
-      cartData[index].price =
-        cartData[index].price - cartData[index].initialPrice;
-    }
-    setCartData([...cartData]);
-  };
+  const cartItems = useSelector((state) => state.cart.items);
 
-  const deleteCart = (index, cart) => {
-    cartData.splice(index, 1);
-    setCartData([...cartData]);
-  };
-
-  const cartFilter = (e) => {
-    if (e !== "clear") {
-      var inpValue = e.target.value;
-      let initialSearch = DATA.filter((element) =>
-        element.name.toLocaleLowerCase().includes(inpValue.toLocaleLowerCase())
-      );
-      setCartData(initialSearch);
-    } else {
-      var inpValue = "";
-      let initialSearch = cartData.filter((element) =>
-        element.name.toLocaleLowerCase().includes(inpValue.toLocaleLowerCase())
-      );
-      setCartData(cartData);
-    }
-  };
-
-  const cards = cartData.map((cart, index) => {
+  const cards = cartItems.map((item,index) => {
     return (
       <Cart
-        key={cart.id}
-        img={cart.coverImg}
-        name={cart.name}
-        price={cart.price}
-        delButton={cart.delButton}
-        share={cart.share}
-        count={cart.qty}
-        add={() => add(index, cart)}
-        subtract={() => subtract(index)}
-        deleteCart={() => deleteCart(index, cart)}
+      key={item.id}
+      item={{
+        index:index,
+        id: item.id,
+        name: item.name,
+        img: item.img,
+        quantity: item.quantity,
+        total: item.totalPrice,
+        price: item.price,}}
       />
     );
   });
 
-  let result = 0;
-  cartData.forEach((number) => {
-    result += number.price;
-  });
+  // let result = 0;
+  // cartData.forEach((number) => {
+  //   result += number.price;
+  // });
 
   const defaultOptions = {
     loop: true,
@@ -88,21 +68,22 @@ const CartPage = () => {
         <div className="cartPage">
           <NavbarPage
             title="vegetable"
-            cartFilter={cartFilter}
-            clearSearch={() => cartFilter("clear")}
+            // cartFilter={cartFilter}
+            // clearSearch={() => cartFilter("clear")}
           />
           <h1>Cart</h1>
           <div className="cart-component">
-            {cartData.length === 0 ? (
+            {cards.length === 0 ? (
               <div className="no-items">
                 <Lottie options={defaultOptions} height={400} width={400} />
                 {/* <h1>There is nothing to show</h1>
                 <BiSad style={{fontSize:'30px', marginTop:'-28px', marginLeft:'8px', color:'#3a7f0d'}} /> */}
               </div>
             ) : (
+              
               <>
-                <div className="cartPageBox">{cards}</div>
-                <div className="bill-board">
+                <div className="cartPageBox">{cards}</div></>)}
+                {/* <div className="bill-board">
                   <div className="cart-container">
                     <h1>Items</h1>
                     <div className="cart-title">
@@ -135,9 +116,9 @@ const CartPage = () => {
                       <p>{`${result}Rs`}</p>
                     </div>
                   </div>
-                </div>
-              </>
-            )}
+                </div> */}
+              
+            
           </div>
         </div>
       </div>
