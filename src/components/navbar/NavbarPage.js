@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Navbar.css";
 import logo from "../../assets/logo.png";
 import { RiShoppingBag3Line } from "react-icons/ri";
 import { GrFavorite } from "react-icons/gr";
 import { BiSearch } from "react-icons/bi";
 import { MdClear, MdOutlineAddBox } from "react-icons/md";
-import moment from "moment";
 import 'react-tooltip/dist/react-tooltip.css'
 import { Tooltip } from "react-tooltip";
 
@@ -51,7 +50,7 @@ const NavbarPage = (props) => {
         </div>
       )}
       <div className="navBarRight">
-        {localStorage.getItem("userInfo") ? (
+        {localStorage.getItem("currentUser") ? (
           <>
           <p className="UserName">{props.username}</p>
           {props.logout} </>
@@ -63,6 +62,7 @@ const NavbarPage = (props) => {
             <GrFavorite
               id="favourite"
               style={{
+                color:'white',
                 fontSize: "24px",
                 marginRight: "50px",
                 cursor: "pointer",

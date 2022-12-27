@@ -35,7 +35,7 @@ const Sidebar = () => {
       icon: BsCart2,
     },
     {
-      key: 4,
+      key: 3,
       name: "Product details",
       navTo: "/table",
       icon: CiViewTable,
@@ -66,7 +66,7 @@ const Sidebar = () => {
                   style={{ fontSize: 20, color: activeLink, zIndex:'1',cursor: "pointer" }}
                 />
                 
-                <h4>{item.name}</h4>{item.key === 3 && <p className="cartBadge">{badgeValue}</p>}
+                <h4>{item.name}</h4>{item.key === 3 && badgeValue > 0 && <p className="cartBadge">{badgeValue}</p>}
               </NavLink>
             </div>
           );

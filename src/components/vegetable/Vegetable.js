@@ -11,7 +11,7 @@ const Vegetable = (props) => {
   const dispatch = useDispatch();
    
 
-  const { name, price, id, img, quantity, addButton, delButton, share} = props;
+  const { name, price, id, img, share} = props;
 
   const addToCartHandler = () => {
     dispatch(
@@ -24,19 +24,18 @@ const Vegetable = (props) => {
     );
     toast("Added to cart",{type:'success'});
     };
-    const addItemHandler = () => {
-      dispatch(cartActions.addItemToCart({
-        id,
-        name,
-        price,
-        img,
-        quantity,
-      }))
-    }
-    const removeItemHandler = () => {
-      dispatch(cartActions.removeItemFromCart(id))
-    }
-    console.log('test', cartActions.addItemToCart(props))
+    // const addItemHandler = () => {
+    //   dispatch(cartActions.addItemToCart({
+    //     id,
+    //     name,
+    //     price,
+    //     img,
+    //     quantity,
+    //   }))
+    // }
+    // const removeItemHandler = () => {
+    //   dispatch(cartActions.removeItemFromCart(id))
+    // }
   
   return (
     <>

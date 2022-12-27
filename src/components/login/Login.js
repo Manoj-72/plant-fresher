@@ -7,6 +7,8 @@ import { Icon } from "react-icons-kit";
 import { eye } from "react-icons-kit/feather/eye";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../store/auth-slice";
 
 const Login = (props) => {
   const email = useRef();
@@ -24,47 +26,85 @@ const Login = (props) => {
   const [err, setErr] = useState(false);
   const [errMessage, setErrMessage] = useState("");
 
+  // const loginOperation = async (e) => {
+  //   e.preventDefault();
+  //   if (!loginMobileNumber.length || !loginPassword.length) {
+  //     alert("Please enter vaild details");
+  //   } else {
+  //   setLoading(true);
+  //   try {
+  //     let Data =
+  //       "userName=" +
+  //       loginMobileNumber +
+  //       "&password=" +
+  //       loginPassword +
+  //       "&grant_type=password&Type=cart";
+  //     const response = await axios({
+  //       method: "POST",
+  //       url: "https://fioritest.avaniko.com/login",
+  //       data: Data,
+  //       headers: {
+  //         "Content-Type": "application/x-www-form-urlencoded",
+  //       },
+  //     });
+  //     localStorage.setItem("userInfo", JSON.stringify(response));
+  //     swal({
+  //       title: `Logged in successfully!`,
+  //       icon: "success",
+  //       dangerMode: false,
+  //     });
+  //     navigate("/");
+      
+      
+  //   } catch (err) {
+  //     setLoading(false);
+  //     setErr(true);
+  //     setErrMessage(err.response.data.error);
+  //     console.error(err);
+  //   }
+  // }
+  // };
+  const dispatch = useDispatch()
+  useEffect(() => {
+    let user = localStorage.getItem(
+      "currentUser",
+      JSON.stringify("currentUser")
+    );
+    if (user) navigate("/login");
+  }, [navigate]);
+  
   const loginOperation = async (e) => {
     e.preventDefault();
-    if (!loginMobileNumber.length || !loginPassword.length) {
-      alert("Please enter vaild details");
+    if (loginMobileNumber.length < 10) {
+      alert("Mobile number should be 10 digits");
+    } else if (loginPassword.length < 6) {
+      alert("Password should be 6 characters atleast");
     } else {
-    setLoading(true);
-    try {
-      let Data =
+      setLoading(true);
+      let data =
         "userName=" +
         loginMobileNumber +
         "&password=" +
         loginPassword +
         "&grant_type=password&Type=cart";
-      const response = await axios({
-        method: "POST",
-        url: "https://fioritest.avaniko.com/login",
-        data: Data,
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      });
-      localStorage.setItem("userInfo", JSON.stringify(response));
-      swal({
-        title: `Logged in successfully!`,
-        icon: "success",
-        dangerMode: false,
-      });
-      navigate("/");
-      
-      
-    } catch (err) {
-      setLoading(false);
-      setErr(true);
-      setErrMessage(err.response.data.error);
-      console.error(err);
+      dispatch(loginUser(data))
+        .unwrap()
+        .then(() => {
+          navigate("/");
+          setLoading(false);
+        })
+        .catch(() => {
+          setLoading(false);
+          error(true);
+        });
     }
-  }
   };
+
+  const error = useSelector(state => state.auth.userInfo);
+
  const singupOperation = async (e) => {
   e.preventDefault();
-  if (!signupName.length|| !signupMobileNumber.length || !signupPassword.length){
+  if (!signupName.length || !signupMobileNumber.length || !signupPassword.length){
     alert("Please enter vaild details");
   } else {
     setLoading(true);
@@ -234,7 +274,7 @@ const Login = (props) => {
             {props.button}
           </button>
         )}
-        {err && <p className="invalid-err">{errMessage}</p>}
+        {err && <p className="invalid-err">{error}</p>}
         {props.title === "Login" && (
           <Link to="/signup">
             <p className="signup">{props.signup}</p>{" "}

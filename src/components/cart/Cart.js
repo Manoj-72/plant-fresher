@@ -8,7 +8,7 @@ import "./Cart.css";
 
 const Cart = (props) => {
   const dispatch = useDispatch()
-  const { name, quantity, img, total, price, id,index } = props.item;
+  const { name, quantity, img, total, price, id, index } = props.item;
 
   const addItemHandler = () => {
     dispatch(cartActions.addItemToCart({
@@ -25,9 +25,7 @@ const Cart = (props) => {
   }
 
   const deleteItemHandler = () => {
-    debugger
-    dispatch(cartActions.deleteItemFromCart(index))
-    console.log(dispatch(cartActions.deleteItemFromCart(index)))
+    dispatch(cartActions.deleteItemFromCart({id, index}))
   }
 
   return (

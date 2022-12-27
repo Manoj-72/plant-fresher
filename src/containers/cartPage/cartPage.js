@@ -45,10 +45,10 @@ const CartPage = () => {
     );
   });
 
-  // let result = 0;
-  // cartData.forEach((number) => {
-  //   result += number.price;
-  // });
+  let result = 0;
+  cartItems.forEach((number) => {
+    result += number.totalPrice;
+  });
 
   const defaultOptions = {
     loop: true,
@@ -80,10 +80,11 @@ const CartPage = () => {
                 <BiSad style={{fontSize:'30px', marginTop:'-28px', marginLeft:'8px', color:'#3a7f0d'}} /> */}
               </div>
             ) : (
-              
+             <div className="cartPageBox">{cards}</div>
+            )}
+             {cards.length > 0 && 
               <>
-                <div className="cartPageBox">{cards}</div></>)}
-                {/* <div className="bill-board">
+              <div className="bill-board">
                   <div className="cart-container">
                     <h1>Items</h1>
                     <div className="cart-title">
@@ -92,22 +93,19 @@ const CartPage = () => {
                       <p>Price</p>
                     </div>
                     <div className="cart-row">
-                      {cartData &&
-                        cartData.map((cart, index) => {
+                       {cartItems.map((cart, index) => {
                           return (
-                            <>
                               <div className="cart-items">
                                 <div className="cart-items-name">
                                   <p>{cart.name}</p>
                                 </div>
                                 <div className="cart-items-name2">
-                                  <p>{`${cart.qty}Kg`}</p>
+                                  <p>{`${cart.quantity}Kg`}</p>
                                 </div>
                                 <div className="cart-items-name3">
-                                  <p>{`${cart.price}Rs`}</p>
+                                  <p>{`${cart.totalPrice}Rs`}</p>
                                 </div>
                               </div>
-                            </>
                           );
                         })}
                     </div>
@@ -116,9 +114,8 @@ const CartPage = () => {
                       <p>{`${result}Rs`}</p>
                     </div>
                   </div>
-                </div> */}
-              
-            
+                </div>
+                </>}           
           </div>
         </div>
       </div>

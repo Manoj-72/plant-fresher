@@ -4,18 +4,23 @@ import "./Header.css";
 import { GiThreeLeaves } from "react-icons/gi";
 import { FaLeaf, FaShippingFast } from "react-icons/fa";
 import { NavbarPage } from "../../components";
+import { useSelector } from "react-redux";
+import { CiLineHeight } from "react-icons/ci";
 
 const Header = () => {
   const [logout, setLogout] = useState(false);
   const [name, setName] = useState("");
   const logOut = () => {
-    localStorage.removeItem("userInfo");
+    localStorage.removeItem("currentUser");
     setLogout(true);
   };
+  const userInfo = JSON.parse(localStorage.getItem("currentUser").charAt(0).toLowerCase())
   useEffect(()=>{
-    if(localStorage.getItem("userInfo")){
-     let  userName = JSON.parse(localStorage.getItem("userInfo")).data.UserName.charAt(0).toUpperCase() + JSON.parse(localStorage.getItem("userInfo")).data.UserName.slice(1).toLowerCase();
-     setName(`Hi ${userName},`)
+    if(localStorage.getItem("currentUser")){
+    // const UserUiName = UserName.charAt(0).toUpperCase() + UserName.slice(1).toLowerCase();
+    //  let  userName = JSON.parse(localStorage.getItem("currentUser")).data.userName;
+    //  console.log(localStorage.getItem("currentUser").data.UserName)
+     setName(`Hi ${userInfo.UserName},`)
     }
      else{
       setName("")
